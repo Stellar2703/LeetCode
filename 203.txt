@@ -1,0 +1,15 @@
+while head:
+            if head.val == val:
+                head=head.next
+            else:
+                break
+        top = head
+        while top and top.next:
+
+            if top.next.val == val:
+                top.next=top.next.next
+            else:
+                top=top.next
+        return head
+
+
