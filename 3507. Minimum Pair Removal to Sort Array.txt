@@ -1,0 +1,32 @@
+class Solution(object):
+    def minimumPairRemoval(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+
+        def is_sorted(nums):
+            for i in range (len(nums)-1):
+                if nums[i]>nums[i+1]:
+                    return False
+            print("True")
+            return True
+        
+        oper=0
+        while not is_sorted(nums):
+            min_sum = float('inf')
+            pos=0
+            for i in range(len(nums)-1):
+                calc = nums[i]+nums[i+1]
+                if min_sum > calc:
+                    min_sum = calc
+                    pos = i
+            
+            nums.pop(pos)
+            nums.pop(pos)
+            nums.insert(pos,min_sum)
+            oper=oper+1
+            print(nums)
+ 
+        
+        return oper
