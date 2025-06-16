@@ -15,13 +15,18 @@ from collections import Counter
 # print(ip)
 
 
-li = [1, 2, 3, 4, 8, 7, 7, 9, 9]
-b = set(li)
-b.sort()
-print(b[len(b)-2])
-print(b)
+# li = [1, 2, 3, 4, 8, 7, 7, 9, 9]
+# b = set(li)
+# b.sort()
+# print(b[len(b)-2])
+# print(b)
 
 # str1 = "zebra"
 # cou = Counter(str1)
 # print(cou)  
 
+a = int(input())
+b = input()
+c= b.split(" ")
+print(tuple(map(int, c)))
+print(hash(c))
