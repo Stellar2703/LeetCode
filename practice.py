@@ -25,8 +25,37 @@ from collections import Counter
 # cou = Counter(str1)
 # print(cou)  
 
-a = int(input())
-b = input()
-c= b.split(" ")
-print(tuple(map(int, c)))
-print(hash(c))
+# a = int(input())
+# b = input()
+# c= b.split(" ")
+# print(tuple(map(int, c)))
+# print(hash(c))
+
+
+
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="test",
+  password="test",
+  port = 3307,
+  database="linux"
+)
+mycursor = mydb.cursor()
+
+# sql = "INSERT INTO admin_users (id ,email , name) VALUES (2 , 'jeevitha@bitsathy.ac.in', 'Jeevitha')"
+# mycursor.execute(sql)
+
+# mydb.commit()
+
+# print(mydb)
+
+
+
+mycursor.execute("SELECT * FROM admin_users")
+
+myresult = mycursor.fetchall()
+
+for x in myresult:
+  print(x)
