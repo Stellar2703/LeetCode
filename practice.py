@@ -33,16 +33,16 @@ from collections import Counter
 
 
 
-import mysql.connector
+# import mysql.connector
 
-mydb = mysql.connector.connect(
-  host="localhost",
-  user="test",
-  password="test",
-  port = 3307,
-  database="linux"
-)
-mycursor = mydb.cursor()
+# mydb = mysql.connector.connect(
+#   host="localhost",
+#   user="test",
+#   password="test",
+#   port = 3307,
+#   database="linux"
+# )
+# mycursor = mydb.cursor()
 
 # sql = "INSERT INTO admin_users (id ,email , name) VALUES (2 , 'jeevitha@bitsathy.ac.in', 'Jeevitha')"
 # mycursor.execute(sql)
@@ -53,9 +53,14 @@ mycursor = mydb.cursor()
 
 
 
-mycursor.execute("SELECT * FROM admin_users")
+# mycursor.execute("SELECT * FROM admin_users")
 
-myresult = mycursor.fetchall()
+# myresult = mycursor.fetchall()
 
-for x in myresult:
-  print(x)
+# for x in myresult:
+#   print(x)
+
+
+a = "Hello, World!"
+for i in a:
+    print(i)
