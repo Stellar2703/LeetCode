@@ -6,8 +6,9 @@ class Solution:
         left = 0
         right = 0
 
-        while left < len(nums):
-            if nums[left] != 0:
-                nums[left],nums[right] = nums[right],nums[left]
-                right = right + 1
-            left = left + 1
+        for i in range(len(nums)):
+            print (nums)
+            if nums[right] != 0:
+                nums[right],nums[left] = nums[left],nums[right]
+                left+=1
+            right+=1
