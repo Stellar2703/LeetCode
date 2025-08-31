@@ -1,0 +1,7 @@
+def power(n):
+    if n == 1:
+        return 2
+    return 2 * power(n-1)
+
+n = 3
+print(power(n))
