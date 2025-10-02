@@ -20,9 +20,21 @@ class Solution:
     #                 visited[j] = True
     #         res.append(sol)
     #     return res
+        
+        # ans = defaultdict(list)
+        # for i in strs:
+        #     ans[''.join(sorted(i))].append(i)
+        # return list(ans.values())
+
+
         ans = defaultdict(list)
-        for i in strs:
-            ans[''.join(sorted(i))].append(i)
+    
+        for word in strs:
+            count = [0] * 26
+            for ch in word:
+                count[ord(ch) - ord('a')] += 1
+            ans[tuple(count)].append(word)  # tuple is hashable
+        
         return list(ans.values())
             
             
