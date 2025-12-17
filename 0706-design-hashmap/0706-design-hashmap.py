@@ -13,7 +13,8 @@ class MyHashMap:
         return self.map[key]
 
     def remove(self, key: int) -> None:
-        del self.map[key]
+        if key in self.map:
+            del self.map[key]
         
 
 
