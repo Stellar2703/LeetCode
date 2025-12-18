@@ -1,4 +1,6 @@
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
-
-        return reduce(xor, (index ^ value for index, value in enumerate(nums, 1)))
+        xor =0
+        for i in range(1,len(nums)+1):
+            xor = xor ^ i ^ nums[i-1]
+        return xor
