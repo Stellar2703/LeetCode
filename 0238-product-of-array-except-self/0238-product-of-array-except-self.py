@@ -6,10 +6,8 @@ class Solution:
         for i in range(len(nums)):
             ans.append(suffix)
             suffix = suffix*nums[i]
-        print(ans)
         for i in range(len(nums)-1,-1,-1):
             ans[i] = ans[i]*prefix
             prefix = prefix*nums[i]
-        print(ans)
         return ans
         
