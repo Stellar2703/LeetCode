@@ -20,13 +20,13 @@ class Solution {
             nse[i] = st.isEmpty() ? n : st.peek();
             st.push(i);
         }
-        for (int i=0;i<=n-1;i++){
-            System.out.print(nse[i]+" ");
-        }
-        System.out.println();
-        for (int i=0;i<=n-1;i++){
-            System.out.print(pse[i]+" ");  
-        }
+        // for (int i=0;i<=n-1;i++){
+        //     System.out.print(nse[i]+" ");
+        // }
+        // System.out.println();
+        // for (int i=0;i<=n-1;i++){
+        //     System.out.print(pse[i]+" ");  
+        // }
         int max_area = 0;
         for (int i=0;i<=n-1;i++){
             int area = (heights[i]*(nse[i]-pse[i]));
