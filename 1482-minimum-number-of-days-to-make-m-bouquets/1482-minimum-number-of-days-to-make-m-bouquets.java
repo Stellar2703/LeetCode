@@ -9,7 +9,6 @@ class Solution {
             maxi = Math.max(maxi,bloomDay[i]);
         }
         int l = 1,r=maxi;
-        int days = 0;
         while (l<=r){
         // for (int day = 1;day<=maxi;day++){
             int day  = (l+r)/2;
@@ -28,12 +27,11 @@ class Solution {
             }
             if(b>=m){
                 r = day-1;
-                days = day;
             }
             else{
                 l = day+1;
             }
         }
-        return days;
+        return l;
     }
 }
