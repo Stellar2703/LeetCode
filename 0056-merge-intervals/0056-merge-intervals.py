@@ -1,7 +1,7 @@
 class Solution:
     def merge(self, n: List[List[int]]) -> List[List[int]]:
         ans = []
-        n.sort(key=lambda x: x[0]) 
+        n.sort() 
         ans.append(n[0])
         print(n)
         ptr = 1
