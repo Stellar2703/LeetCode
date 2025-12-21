@@ -7,7 +7,7 @@ class Solution:
         for i in range(k):
             if(s[i] in vow):
                 count+=1
-        max_count=max(max_count,count)
+        max_count=count
         for r in range(k,len(s)):
             if s[r] in vow:
                 count+=1
