@@ -5,7 +5,7 @@ class Solution {
         int l =0,ans = 0;
         for(int r =0;r<nums.length;r++){
             win+=nums[r];
-            while((win+k) < ((long)nums[r]*(r-l+1)) && l<=r){
+            if((win+k) < ((long)nums[r]*(r-l+1)) && l<=r){
                 win-=nums[l];
                 l++;
             }
