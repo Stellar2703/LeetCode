@@ -1,29 +1,44 @@
 class Solution {
     public List<Integer> findAnagrams(String s, String p) {
-        HashMap<Charecter,Integer> req = new HashMap<>();
-        HashMap<Charecter,Integer> win = new HashMap<>();
-        ArrayList<Integer> ans = new ArrayList<>();
-        int l=0,formed=0,required=0;
-        for(int i=0;i<p.length();i++){
-            char temp = p.charAt(i);
-            req.put(temp,req.getOrDefault(temp,0)+1);
+        List<Integer> ans = new ArrayList<>();
+        if (s.length() < p.length()) return ans;
+
+        Map<Character, Integer> req = new HashMap<>();
+        Map<Character, Integer> win = new HashMap<>();
+
+        // build frequency map of p
+        for (int i = 0; i < p.length(); i++) {
+            char c = p.charAt(i);
+            req.put(c, req.getOrDefault(c, 0) + 1);
         }
-        required = req.size();
-        for(int i=0;i<p.length();i++){
-            win.put(s.charAt(i),win.getOrDefault(s.charAt(i),0)+1);
-            if(req.containsKey(s.charAt(i)) && win.get(charAt(i)==req.get(charAt(i)))){
+
+        int required = req.size();
+        int formed = 0;
+        int l = 0;
+
+        for (int r = 0; r < s.length(); r++) {
+            char c = s.charAt(r);
+            win.put(c, win.getOrDefault(c, 0) + 1);
+
+            if (req.containsKey(c) && win.get(c).intValue() == req.get(c).intValue()) {
                 formed++;
             }
-        }
-            if (formed == required) ans[] = l;
-        for(int r=p.length()-1;r<s.length();r++){
-            win.put(s.charAt(r),win.getOrDefault(s.charAt(r),0)+1);
 
-            if(r-l+1<=p.length()){
-                win.put(s.charAt(l),win.get(s.charAt(l))-1);
-                formed--;
+            while (r - l + 1 > p.length()) {
+                char left = s.charAt(l);
+                if (req.containsKey(left) &&
+                    win.get(left).intValue() == req.get(left).intValue()) {
+                    formed--;
+                }
+                win.put(left, win.get(left) - 1);
+                l++;
             }
-            
-            if (formed == required) ans[] = l;
+
+            if (formed == required && r - l + 1 == p.length()) {
+                ans.add(l);
+            }
+        }
+
+        return ans;
     }
 }
