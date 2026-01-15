@@ -13,21 +13,42 @@
  *     }
  * }
  */
+// class Solution {
+//     public List<Integer> rightSideView(TreeNode root) {
+//         Queue<TreeNode> q = new LinkedList<>();
+//         List<Integer> ans =  new ArrayList<>();
+//         if(root == null) return ans;
+//         q.offer(root);
+//         while(!q.isEmpty()){
+//             int size = q.size();
+//             for(int i =0;i<size;i++){
+//                 TreeNode node = q.poll();
+//                 if(node.left!=null) q.offer(node.left);
+//                 if(node.right!=null) q.offer(node.right);
+//                 if (i == size - 1) ans.add(node.val); // rightmost
+//             }
+//         }
+//         return ans;
+//     }   
+// }
+
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
-        Queue<TreeNode> q = new LinkedList<>();
-        List<Integer> ans =  new ArrayList<>();
-        if(root == null) return ans;
-        q.offer(root);
-        while(!q.isEmpty()){
-            int size = q.size();
-            for(int i =0;i<size;i++){
-                TreeNode node = q.poll();
-                if(node.left!=null) q.offer(node.left);
-                if(node.right!=null) q.offer(node.right);
-                if (i == size - 1) ans.add(node.val); // rightmost
-            }
-        }
+        List<Integer> ans = new ArrayList<>();
+        dfs(root, 0, ans);
         return ans;
-    }   
+    }
+
+    private void dfs(TreeNode node, int level, List<Integer> ans) {
+        if (node == null) return;
+
+        // First node at this level → rightmost
+        if (level == ans.size()) {
+            ans.add(node.val);
+        }
+
+        // Traverse right first
+        dfs(node.right, level + 1, ans);
+        dfs(node.left, level + 1, ans);
+    }
 }
