@@ -18,7 +18,6 @@ class Solution {
         if(root == null) return;
         int len = temp.length();
         temp.append(root.val);
-
         if((root.left == null) && (root.right==null)){
             ans.add(temp.toString());
         }
