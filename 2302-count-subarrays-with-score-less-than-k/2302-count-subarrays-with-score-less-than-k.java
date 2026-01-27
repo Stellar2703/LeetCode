@@ -1,6 +1,7 @@
 class Solution {
     public long countSubarrays(int[] nums, long k) {
-        int sum =0,l=0,count=0;
+        long sum =0,count=0;
+        int l=0;
         for(int r=0;r<nums.length;r++){
             sum+=nums[r];
             
