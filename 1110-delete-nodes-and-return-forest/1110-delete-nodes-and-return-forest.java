@@ -32,7 +32,7 @@ class Solution {
         }
         ArrayList<TreeNode> ans = new ArrayList<>();
         TreeNode last = f(root,del,ans);
-        ans.add(last);
+        if(last!=null)ans.add(last);
         return ans;
     }
 }
