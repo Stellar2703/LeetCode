@@ -9,45 +9,40 @@
  */
 class Solution {
     public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
-        // Do traversal to get the parent elements
-
         Queue<TreeNode> q = new LinkedList<>();
         q.offer(root);
-        HashMap<TreeNode,TreeNode> mp = new HashMap<>();
+        HashMap<TreeNode,TreeNode> parent = new HashMap<>();
         while(!q.isEmpty()){
-            TreeNode node = q.poll();
-            if(node.left!=null){
-             mp.put(node.left,node);
-             q.offer(node.left);
+            TreeNode node  = q.poll();
+                if(node.right!= null) {
+                    parent.put(node.right,node);
+                    q.offer(node.right);}
+                if(node.left!= null) {
+                    parent.put(node.left,node);
+                    q.offer(node.left);}
             }
-            if(node.right!= null){
-                mp.put(node.right,node);
-                q.offer(node.right);
-            }
-        }
         q.clear();
-        HashSet<TreeNode> visited = new HashSet<>();
-        int dist = 0;
         q.offer(target);
-        visited.add(target);
+        int dist = 0;
+        HashSet<TreeNode> vis = new HashSet<>();
+        List<Integer> ans = new ArrayList<>();
+        vis.add(target);
         while(!q.isEmpty() && dist<k){
-            int size = q.size();
-            for(int i=0;i<size;i++){
-            TreeNode node = q.poll();
-            if(node.left!=null && !visited.contains(node.left)) {
-                q.offer(node.left);
-                visited.add(node.left);}
-            if(node.right!= null && !visited.contains(node.right)){
-                q.offer(node.right);
-                visited.add(node.right);
-            } 
-            if(mp.containsKey(node)&& !visited.contains(mp.get(node))) {
-                q.offer(mp.get(node));
-                visited.add(mp.get(node));}
+            int n = q.size();
+            for(int i =0;i<n;i++){
+                TreeNode node = q.poll();
+                if(node.left!=null && !vis.contains(node.left)){
+                 q.offer(node.left);
+                 vis.add(node.left);}
+                if(node.right!=null && !vis.contains(node.right)) {
+                    q.offer(node.right);
+                    vis.add(node.right);}
+                if(parent.containsKey(node) && !vis.contains(parent.get(node))) {
+                    q.offer(parent.get(node));
+                    vis.add(parent.get(node));}
             }
             dist++;
         }
-        List<Integer> ans = new ArrayList<>();
         while(!q.isEmpty()){
             ans.add(q.poll().val);
         }
