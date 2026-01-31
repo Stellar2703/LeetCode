@@ -30,7 +30,7 @@ class Solution {
                 }
             }
         }
-        if(ans.size() != n) return new int[1];
+        if(ans.size() != n) return new int[0];
         int[] result = new int[n];
         for(int i=0;i<n;i++){
             result[i]=ans.get(i);
