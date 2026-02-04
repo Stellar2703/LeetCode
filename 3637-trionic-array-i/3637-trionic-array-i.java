@@ -1,19 +1,18 @@
 class Solution {
     public boolean isTrionic(int[] nums) {
-        int inc = 0;
-        int dec = 0;
-        int index = 1;
-        while (index < nums.length) {
-            if (nums[index - 1] < nums[index]) {
-                while (index < nums.length && nums[index - 1] < nums[index])
-                    index++;
-                if (index < nums.length && nums[index - 1] > nums[index]) {
-                    while (index < nums.length && nums[index - 1] > nums[index])
-                        index++;
+        int n = nums.length;
+        int i = 1;
+        while (i < n) {
+            if (nums[i - 1] < nums[i]) {
+                while (i < n && nums[i - 1] < nums[i])
+                    i++;
+                if (i < n && nums[i - 1] > nums[i]) {
+                    while (i < n && nums[i - 1] > nums[i])
+                        i++;
 
-                    if (index < nums.length && nums[index - 1] < nums[index]) {
-                        while (index < nums.length && nums[index - 1] < nums[index])
-                            index++;
+                    if (i < n && nums[i - 1] < nums[i]) {
+                        while (i < n && nums[i - 1] < nums[i])
+                            i++;
                     } else {
                         return false;
                     }
