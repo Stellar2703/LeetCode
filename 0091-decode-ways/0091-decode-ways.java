@@ -1,38 +1,38 @@
 class Solution {
-    public int f(int start,String s,int [] dp){
-        if(start==s.length())return 1;
-        if(s.charAt(start)=='0') return 0;
-        if (dp[start]!=-1) return dp[start];
-        dp[start] = f(start+1,s,dp);
-        if(start+1<s.length() && Integer.parseInt(s.substring(start,start+2))<=26){
-            dp[start]+= f(start+2,s,dp);
+    public int f(String s,int index,int[] dp){
+        if(index==s.length()) return 1;
+        if(s.charAt(index)=='0') return 0;
+        if(dp[index]!=-1) return dp[index];
+        int pick = f(s,index+1,dp);
+        int picktwo=0;
+        if(index+1<s.length() && Integer.parseInt(s.substring(index,index+2))<=26){
+            picktwo = f(s,index+2,dp);
         }
-        return dp[start];
+        dp[index] = pick + picktwo;
+        return dp[index];
     }
     public int numDecodings(String s) {
-        int [] dp = new int[s.length()];
+        int [] dp =  new int[s.length()];
         Arrays.fill(dp,-1);
-        return f(0,s,dp);
-        // return dp[0];
+        return f(s,0,dp);
     }
 }
 
 
 
 // class Solution {
-//     public int f(int start,String s){
-//         if(start==s.length()) return 1;
-//         if(s.charAt(start)=='0') return 0;
-
-//         int pick = f(start+1,s);
-//         if(start+1<=s.length()-1 && Integer.parseInt(s.substring(start,start+2))<=26){
-//             pick += f(start+2,s);
+//     public int f(String s,int index){
+//         if(index==s.length()) return 1;
+//         if(s.charAt(index)=='0') return 0;
+//         int pick = f(s,index+1);
+//         int picktwo = 0;
+//         if(index+1<s.length() && Integer.parseInt(s.substring(index,index+2))<=26){
+//             picktwo = f(s,index+2);
 //         }
 
-//         return pick;
-
+//         return pick+picktwo;
 //     }
 //     public int numDecodings(String s) {
-//         return f(0,s);
+//         return f(s,0);
 //     }
 // }
