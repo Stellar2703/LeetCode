@@ -2,7 +2,7 @@ class Solution {
     public int f(int fir,int sec,String s1,String s2,int[][] dp){
         if(fir >= s1.length() || sec>=s2.length()) return 0;
         if(dp[fir][sec]!=-1) return dp[fir][sec];
-        else if (s1.charAt(fir)==s2.charAt(sec)){
+        if (s1.charAt(fir)==s2.charAt(sec)){
             dp[fir][sec] =  1 + f(fir+1,sec+1,s1,s2,dp);
             return dp[fir][sec];
         }
