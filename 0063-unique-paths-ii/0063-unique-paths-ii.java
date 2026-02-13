@@ -1,6 +1,10 @@
 class Solution {
     public int f(int[][] grid,int i ,int j,int[][] dp){
-        if(i==grid.length-1 && j==grid[0].length-1) return 1;
+        if(i==grid.length-1 && j==grid[0].length-1) {
+            if(grid[i][j]==0)
+            return 1;
+            else return 0;
+        }
         if(i>grid.length-1 || j>grid[0].length-1) return 0;
         if(grid[i][j]==1)return 0;
         if(dp[i][j]!=-1)return dp[i][j];
