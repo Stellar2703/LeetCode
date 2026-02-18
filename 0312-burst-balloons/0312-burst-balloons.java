@@ -1,14 +1,4 @@
 class Solution {
-    public int f(int i, int j , int[] arr,int[][] dp){
-        if(i>j) return 0;
-        int maxi = Integer.MIN_VALUE;
-        if(dp[i-1][j-1]!=-1) return dp[i-1][j-1];
-        for(int k=i;k<=j;k++){
-            int process = f(i,k-1,arr,dp) + arr[i-1]*arr[k]*arr[j+1] + f(k+1,j,arr,dp);
-            maxi = Math.max(maxi,process);
-        }
-        return dp[i-1][j-1] = maxi;
-    }
     public int maxCoins(int[] nums) {
         int n = nums.length;
         int[] arr = new int[n+2];
@@ -17,10 +7,45 @@ class Solution {
         for(int i=1;i<=n;i++){
             arr[i] = nums[i-1];
         }
-        int[][]dp=new int[n][n];
-        for(int i=0;i<n;i++){
-            Arrays.fill(dp[i],-1);
+        int[][]dp=new int[n+2][n+2];
+        int maxi = Integer.MIN_VALUE;
+        for(int i =n;i>=1;i--){
+            for(int j=i;j<=n;j++){
+                // if(i>j) continue;
+                for(int k=i;k<=j;k++){
+                    int process = dp[i][k-1] + arr[i-1]*arr[k]*arr[j+1] + dp[k+1][j];
+                    dp[i][j] = Math.max(dp[i][j],process);
+                }
+            }
         }
-        return f(1,n,arr,dp);
+        return dp[1][n];
     }
 }
+
+
+// class Solution {
+//     public int f(int i, int j , int[] arr,int[][] dp){
+//         if(i>j) return 0;
+//         int maxi = Integer.MIN_VALUE;
+//         if(dp[i-1][j-1]!=-1) return dp[i-1][j-1];
+//         for(int k=i;k<=j;k++){
+//             int process = f(i,k-1,arr,dp) + arr[i-1]*arr[k]*arr[j+1] + f(k+1,j,arr,dp);
+//             maxi = Math.max(maxi,process);
+//         }
+//         return dp[i-1][j-1] = maxi;
+//     }
+//     public int maxCoins(int[] nums) {
+//         int n = nums.length;
+//         int[] arr = new int[n+2];
+//         arr[0] =1;
+//         arr[n+1] =1;
+//         for(int i=1;i<=n;i++){
+//             arr[i] = nums[i-1];
+//         }
+//         int[][]dp=new int[n][n];
+//         for(int i=0;i<n;i++){
+//             Arrays.fill(dp[i],-1);
+//         }
+//         return f(1,n,arr,dp);
+//     }
+// }
