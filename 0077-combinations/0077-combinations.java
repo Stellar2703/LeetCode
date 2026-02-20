@@ -5,7 +5,7 @@ class Solution {
             return;
         }
 
-        for(int i=start;i<=n;i++){
+        for(int i=start;i<=n-k+1;i++){
             temp.add(i);
             f(n,k-1,i+1,ans,temp);
             temp.remove(temp.size()-1);
