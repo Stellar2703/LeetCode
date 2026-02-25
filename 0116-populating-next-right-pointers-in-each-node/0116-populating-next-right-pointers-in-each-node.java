@@ -24,18 +24,42 @@ class Node {
 class Solution {
     public Node connect(Node root) {
         if(root==null) return root;
-        Queue<Node> q = new LinkedList<>();
-        q.offer(root);
-        while(!q.isEmpty()){
-            int size = q.size();
-            for(int i=0;i<size;i++){
-                Node node = q.poll();
-                if(i==size-1) node.next = null;
-                else node.next = q.peek();
-                if(node.left!= null) q.offer(node.left);
-                if(node.right!= null) q.offer(node.right);
-            }
+
+        if(root.left!=null){
+            root.left.next = root.right;
+            if(root.next!= null){
+            root.right.next = root.next.left;
         }
+        }
+        
+        connect(root.left);
+        connect(root.right);
+        
         return root;
+
     }
 }
+
+
+
+
+
+// !------  BFS Approach --------!
+// class Solution {
+//     public Node connect(Node root) {
+//         if(root==null) return root;
+//         Queue<Node> q = new LinkedList<>();
+//         q.offer(root);
+//         while(!q.isEmpty()){
+//             int size = q.size();
+//             for(int i=0;i<size;i++){
+//                 Node node = q.poll();
+//                 if(i==size-1) node.next = null;
+//                 else node.next = q.peek();
+//                 if(node.left!= null) q.offer(node.left);
+//                 if(node.right!= null) q.offer(node.right);
+//             }
+//         }
+//         return root;
+//     }
+// }
