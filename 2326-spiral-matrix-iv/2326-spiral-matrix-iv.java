@@ -10,10 +10,15 @@
  */
 class Solution {
     public int[][] spiralMatrix(int m, int n, ListNode head) {
-        Integer[][] ans = new Integer[m][n];
+        int[][] ans = new int[m][n];
+
         int top = 0, left = 0;
         int right = n - 1;
         int bottom = m - 1;
+        
+        for(int i =0;i<m;i++){
+            Arrays.fill(ans[i],-1);
+        }
 
         while (top <= bottom && right >= left && head != null) {
             for (int i = left; i <= right; i++) {
@@ -52,14 +57,6 @@ class Solution {
             }
         }
 
-        int[][] result = new int[m][n];
-
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                result[i][j] = (ans[i][j] == null) ? -1 : ans[i][j];
-            }
-        }
-
-        return result;
+        return ans;
     }
 }
