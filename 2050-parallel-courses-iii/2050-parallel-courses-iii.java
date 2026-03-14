@@ -1,45 +1,31 @@
 class Solution {
     public int minimumTime(int n, int[][] relations, int[] time) {
-        Queue<Integer> q = new LinkedList<>();
-        
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-        for(int i=0;i<=n;i++){
+        Queue<Integer> q = new LinkedList<>();
+        int[] indeg = new int[n+1];
+        for(int i=0;i<n+1;i++){
             adj.add(new ArrayList<>());
         }
-
-        int[] indeg = new int[n+1];
-
-        for(int[] edge : relations){
-            adj.get(edge[0]).add(edge[1]);
-            indeg[edge[1]]++;
+        for(int i=0;i<relations.length;i++){
+            adj.get(relations[i][0]).add(relations[i][1]);
+            indeg[relations[i][1]]++;
         }
-
-        int[] dp = new int[n+1];
-
-        for(int i=1;i<=n;i++){
-            dp[i] = time[i-1];
+        int [] dp =  new int[n+1];
+        for(int i =1;i<n+1;i++){
             if(indeg[i]==0) q.offer(i);
+            dp[i] = time[i-1];
         }
-
         int ans = 0;
-
         while(!q.isEmpty()){
-            int node = q.poll();
-
-            ans = Math.max(ans, dp[node]);
-
-            for(int next : adj.get(node)){
-                
-                dp[next] = Math.max(dp[next], dp[node] + time[next-1]);
-
-                indeg[next]--;
-
-                if(indeg[next]==0){
-                    q.offer(next);
+            int size = q.size();
+                int node = q.poll();
+                ans = Math.max(ans,dp[node]);
+                for(int j : adj.get(node)){
+                    indeg[j]--;
+                    dp[j] = Math.max(dp[j],dp[node]+time[j-1]);
+                    if(indeg[j]==0) q.offer(j);
                 }
-            }
         }
-
         return ans;
     }
 }
