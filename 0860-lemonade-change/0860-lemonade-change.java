@@ -19,6 +19,9 @@ class Solution {
                     arr[0]--;
                     arr[1]--;
                 }
+                else if(arr[0]>2){
+                    arr[0]-=3;
+                }
                 else{
                     return false;
                 }
