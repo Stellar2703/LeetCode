@@ -1,24 +1,55 @@
 class Solution {
     public int numDecodings(String s) {
         int n = s.length();
-        int[] dp = new int[n+1];
-        dp[n] = 1;
-        int oneDigit = 0;
-        int twoDigit = 0;
-        for(int i=n-1;i>=0;i--){
-            oneDigit = 0;
-            twoDigit = 0;
-            if(s.charAt(i)!='0'){
-                oneDigit = dp[i+1];
-                if(i<n-1 && Integer.parseInt(s.substring(i,i+2))<=26){
-                    twoDigit = dp[i+2];
-                }
+        int next1 = 1 ,next2 = 0 ,curr = 0;
+        for(int i = n -1;i>=0;i--) {
+            curr= 0;
+            if(s.charAt(i)=='0'){
+                next2 = next1;
+                next1 = 0;
+                continue;
             }
-            dp[i] = oneDigit + twoDigit;
+                curr+=next1;
+                if(i<n-1 && (s.charAt(i)=='1'||(s.charAt(i)=='2'&& s.charAt(i+1)<'7'))){
+                    curr+=next2;
+                }
+                next2 = next1;
+                next1 = curr;
         }
-        return dp[0];
+        return next1;
     }
 }
+
+
+
+
+
+
+
+
+
+// class Solution {
+//     public int numDecodings(String s) {
+//         int n = s.length();
+//         int[] dp = new int[n+1];
+//         dp[n] = 1;
+//         int oneDigit = 0;
+//         int twoDigit = 0;
+//         for(int i=n-1;i>=0;i--){
+//             oneDigit = 0;
+//             twoDigit = 0;
+//             if(s.charAt(i)!='0'){
+//                 oneDigit = dp[i+1];
+//                 if(i<n-1 && Integer.parseInt(s.substring(i,i+2))<=26){
+//                     twoDigit = dp[i+2];
+//                 }
+//             }
+//             dp[i] = oneDigit + twoDigit;
+//         }
+//         return dp[0];
+//     }
+// }
+
 
 
 
