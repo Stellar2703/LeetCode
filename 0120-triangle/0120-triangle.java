@@ -1,13 +1,17 @@
 class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
         int n = triangle.size();
-        int[] dp = new int[n];
-        for(int i=0;i<n;i++){
-            dp[i] = triangle.get(n-1).get(i);
-        }
-        for(int i = n-2;i>=0;i--){
-            for(int j=0;j<=i;j++){
-                dp[j] = triangle.get(i).get(j) + Math.min(dp[j],dp[j+1]);
+        int [] dp = new int[triangle.get(n-1).size()];
+
+        for(int i=n-1;i>=0;i--){
+            for(int j=0;j <=triangle.get(i).size()-1;j++){
+                if(i==n-1){
+                    dp[j] = triangle.get(i).get(j);
+                    continue;
+                }
+                int down  = triangle.get(i).get(j) + dp[j];
+                int right = triangle.get(i).get(j) + dp[j+1];
+                dp[j] = Math.min(down,right);
             }
         }
         return dp[0];
@@ -15,24 +19,29 @@ class Solution {
 }
 
 
-
-
-
-
-
 // class Solution {
+//     public int f(int i,int j,List<List<Integer>> tri,int[][] dp){
+//         if(i == tri.size()) return 0;
+//         if(dp[i][j]!=Integer.MIN_VALUE) return dp[i][j];
+        
+//         int down = tri.get(i).get(j) + f(i+1,j,tri,dp);
+//         int right = tri.get(i).get(j) + f(i+1,j+1,tri,dp);
+
+//         return dp[i][j] = Math.min(down,right);
+//     }
 //     public int minimumTotal(List<List<Integer>> triangle) {
 //         int n = triangle.size();
 //         int m = triangle.get(n-1).size();
-//         int[][] dp = new int[n][m];
-//         for(int i=0;i<m;i++){
-//             dp[n-1][i] = triangle.get(n-1).get(i);
-//         }
-//         for(int i = n-2;i>=0;i--){
-//             for(int j = 0 ;j<=i;j++){
+//         int [][] dp = new int [n][m];
+//         for(int i =n-1;i>=0;i--){
+//             for(int j=triangle.get(i).size()-1;j>=0;j--){
+//                 if(i==n-1){
+//                     dp[i][j] = triangle.get(i).get(j);
+//                     continue;
+//                 }
 //                 int right = triangle.get(i).get(j) + dp[i+1][j+1];
-//                 int left = triangle.get(i).get(j)+dp[i+1][j];
-//                 dp[i][j] = Math.min(right,left);
+//                 int down  = triangle.get(i).get(j) + dp[i+1][j];
+//                 dp[i][j] = Math.min(right,down);
 //             }
 //         }
 //         return dp[0][0];
@@ -41,18 +50,25 @@ class Solution {
 
 
 
-// class Solution {
-//     public int f(int i,int j ,List<List<Integer>> arr,Integer[][]dp){
-//         if(i>=arr.size() || j>=arr.get(i).size()) return 0;
-//         if(dp[i][j]!=null) return dp[i][j];
-//         int left = arr.get(i).get(j) + f(i+1,j,arr,dp);
-//         int right = arr.get(i).get(j) + f(i+1,j+1,arr,dp);
 
-//         return dp[i][j] = Math.min(left,right);
+
+// class Solution {
+//     public int f(int i,int j,List<List<Integer>> tri,int[][] dp){
+//         if(i == tri.size()) return 0;
+//         if(dp[i][j]!=Integer.MIN_VALUE) return dp[i][j];
         
+//         int down = tri.get(i).get(j) + f(i+1,j,tri,dp);
+//         int right = tri.get(i).get(j) + f(i+1,j+1,tri,dp);
+
+//         return dp[i][j] = Math.min(down,right);
 //     }
 //     public int minimumTotal(List<List<Integer>> triangle) {
-//         Integer[][] dp  =new Integer[triangle.size()][triangle.get(triangle.size()-1).size()];
+//         int n = triangle.size();
+//         int m = triangle.get(n-1).size();
+//         int [][] dp = new int [n][m];
+//         for(int i =0;i<n;i++){
+//             Arrays.fill(dp[i],Integer.MIN_VALUE);
+//         }
 //         return f(0,0,triangle,dp);
 //     }
 // }
