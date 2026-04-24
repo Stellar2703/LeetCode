@@ -1,52 +1,50 @@
-class Pair {
-    int row;
-    int col;
-
-    Pair(int _row, int _col) {
-        this.row = _row;
-        this.col = _col;
-    }
-}
-
 class Solution {
+
+    class Pair{
+        int row;
+        int col;
+        Pair(int row,int col){
+            this.row=row;
+            this.col=col;
+        }
+    }
     public int orangesRotting(int[][] grid) {
         int n = grid.length;
         int m = grid[0].length;
-        int fresh = 0;
+
         Queue<Pair> q = new LinkedList<>();
-        for(int i=0;i<n;i++){
+        int good = 0,time = 0,rot=0;
+        for(int i =0;i<n;i++){
             for(int j=0;j<m;j++){
                 if(grid[i][j]==2){
                     q.offer(new Pair(i,j));
                 }
                 if(grid[i][j]==1){
-                    fresh++;
+                    good++;
                 }
             }
         }
-        if(fresh==0) return 0;
-        int[] drow = {0,1,0,-1};
-        int[] dcol = {-1,0,1,0};
-        int minutes = 0;
-        while(!q.isEmpty()){
-            int size = q.size();
-            for(int j=0;j<size;j++){
-            int row = q.peek().row;
-            int col = q.peek().col;
-            q.poll();
-            for(int i =0;i<4;i++){
-                int nrow = row+drow[i];
-                int ncol = col + dcol[i];
-                if(nrow>=0 && nrow<n && ncol>=0 && ncol <m  && grid[nrow][ncol]==1){
-                    q.offer(new Pair(nrow, ncol));
-                    grid[nrow][ncol]=2;
-                    fresh--;
-                }
-            }
-        }
-            minutes++;
+        if(good==0) return 0;
 
+        while(!q.isEmpty()){
+            int size  =q.size();
+            // Syqem.out.println(size);
+            for(int i =0;i<size;i++){
+                Pair p = q.poll();
+                int[] drow = {-1,0,1,0};
+                int[] dcol = {0,1,0,-1};
+                for(int j=0;j<4;j++){
+                    int nrow = p.row+drow[j];
+                    int ncol = p.col+dcol[j];
+                    if(nrow>=0 && ncol>=0 && nrow<n && ncol<m && grid[nrow][ncol]==1){
+                        q.offer(new Pair(nrow,ncol));
+                        good--;
+                        grid[nrow][ncol]=2;
+                    }
+                }
+            }
+            time++;
         }
-        return fresh == 0 ? minutes-1 : -1;
+        return good==0 ? time-1 : -1;
     }
 }
