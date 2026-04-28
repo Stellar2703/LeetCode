@@ -19,6 +19,7 @@ class Solution {
                 q.offer(i);
             }
         }
+
         int count =0;
         while(!q.isEmpty()){
             int node = q.poll();
@@ -26,7 +27,7 @@ class Solution {
             for(int a: adj.get(node)){
                 indeg[a]--;
                 if(indeg[a]==0){
-                    q.offer(indeg[a]);
+                    q.offer(a);
                 }
             }
         }
