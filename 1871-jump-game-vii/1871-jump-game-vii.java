@@ -8,7 +8,7 @@ class Solution {
         int farthest =0;
         while(!q.isEmpty()){
             int node = q.poll();
-            int start = Math.max(node+minJump,farthest);
+            int start = Math.max(node+minJump,farthest+1);
             int end = Math.min(node+maxJump,n-1);
             if(node==n-1) return true;
             for(int i = start;i<=end;i++){
