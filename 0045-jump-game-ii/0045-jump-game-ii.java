@@ -12,7 +12,6 @@ class Solution {
             r = farthest;
             jump++;
         }
-        System.gc();
         return jump;
     }
 }
