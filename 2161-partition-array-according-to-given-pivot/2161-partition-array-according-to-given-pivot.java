@@ -17,9 +17,18 @@ class Solution {
 
         int [] ans = new int[nums.length];
         int index = 0;
-        for(int i:less)ans[index++] = i;
-        for(int i:equal)ans[index++] = i;
-        for(int i:greater)ans[index++] = i;
+        for(int i =0;i<less.size();i++){
+            ans[index] = less.get(i);
+            index+=1;
+        }
+        for(int i =0;i<equal.size();i++){
+            ans[index] = equal.get(i);
+            index+=1;
+        }
+        for(int i =0;i<greater.size();i++){
+            ans[index] = greater.get(i);
+            index+=1;
+        }
         return ans;
     }
 }
