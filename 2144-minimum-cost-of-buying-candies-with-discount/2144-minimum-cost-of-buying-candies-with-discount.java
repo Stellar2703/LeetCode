@@ -3,16 +3,13 @@ class Solution {
         Arrays.sort(cost);
 
         int ans = 0;
-        int count = 0;
+        int pos = 1;
 
         for (int i = cost.length - 1; i >= 0; i--) {
-            count++;
-
-            if (count % 3 == 0) {
-                continue; // free candy
+            if(pos%3!=0){
+                ans+=cost[i];
             }
-
-            ans += cost[i];
+            pos++;
         }
 
         return ans;
