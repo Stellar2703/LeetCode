@@ -10,13 +10,9 @@ class Solution {
             if (mp.containsKey(c)) {
                 st.push(c);
             } else {
-                if (!st.isEmpty() && mp.get(st.peek()) == c) {
-                    st.pop();
-                } else {
-                    return false;
-                }
-            }
-           
+                if(st.isEmpty()) return false;
+                if(c!= mp.get(st.pop())) return false;
+            }           
         }
          if (st.isEmpty()) {
                 return true;
