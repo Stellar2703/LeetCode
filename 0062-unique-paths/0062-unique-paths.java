@@ -1,24 +1,44 @@
 class Solution {
+    private int f(int row,int col,int m,int n,int[][] dp){
+        if(row == m-1 && col == n-1) return 1;
+        if(row>=m || col>=n) return 0;
+        if(dp[row][col]!=-1)return dp[row][col];
+        int right = f(row,col+1,m,n,dp);
+        int down = f(row+1,col,m,n,dp);
+        return dp[row][col]= right+down;
+    }
     public int uniquePaths(int m, int n) {
-        int [] next = new int[n];
-        int [] curr = new int[n];
-
-        for(int i=m-1;i>=0;i--){
-            for(int j = n-1;j>=0;j--){
-                if(i==m-1 && j==n-1) {
-                    curr[j] =1;
-                    continue;
-                }
-                int right = j+1<n ? curr[j+1]  : 0;
-                int down = i+1<m ? next[j]  : 0;
-                
-                curr[j] = right + down;
-            }
-            next = curr.clone();
-        }
-        return next[0];
+        int[][] dp = new int[m+1][n+1];
+        for(int i =0;i<m;i++) Arrays.fill(dp[i],-1);
+        return f(0,0,m,n,dp);
     }
 }
+
+
+
+
+
+// class Solution {
+//     public int uniquePaths(int m, int n) {
+//         int [] next = new int[n];
+//         int [] curr = new int[n];
+
+//         for(int i=m-1;i>=0;i--){
+//             for(int j = n-1;j>=0;j--){
+//                 if(i==m-1 && j==n-1) {
+//                     curr[j] =1;
+//                     continue;
+//                 }
+//                 int right = j+1<n ? curr[j+1]  : 0;
+//                 int down = i+1<m ? next[j]  : 0;
+                
+//                 curr[j] = right + down;
+//             }
+//             next = curr.clone();
+//         }
+//         return next[0];
+//     }
+// }
 
 
 
