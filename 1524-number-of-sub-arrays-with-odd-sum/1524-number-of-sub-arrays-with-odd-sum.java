@@ -3,7 +3,7 @@ class Solution {
     public int numOfSubarrays(int[] arr) {
         
         int n  = arr.length;
-        int ans = 0;
+        long ans = 0;
         // Brute Force
 
         // for(int i=0;i<n;i++){
@@ -32,23 +32,39 @@ class Solution {
 
     // Better 2
 
-    int [] prefix = new int[n];
-    prefix[0] = arr[0];
-    for(int i =1;i<n;i++){
-        prefix[i] = arr[i]+prefix[i-1];
-    }
+    // int [] prefix = new int[n];
+    // prefix[0] = arr[0];
+    // for(int i =1;i<n;i++){
+    //     prefix[i] = arr[i]+prefix[i-1];
+    // }
+    // int oddCount =0,evenCount=1;
+    // for(int i =0;i<n;i++){
+    //     if(prefix[i]%2==0){
+    //         ans+=oddCount;
+    //         evenCount++;
+    //     }
+    //     else{
+    //         ans+=evenCount;
+    //         oddCount++;
+    //     }
+    // }
+    // return (int)(ans%MOD);
+
+
+    // Optimal
     int oddCount =0,evenCount=1;
     long sum =0;
     for(int i =0;i<n;i++){
-        if(prefix[i]%2==0){
-            sum+=oddCount;
+        sum+= arr[i];
+        if(sum%2==0){
+            ans+=oddCount;
             evenCount++;
         }
         else{
-            sum+=evenCount;
+            ans+=evenCount;
             oddCount++;
         }
     }
-    return (int)(sum%MOD);
+    return (int)(ans%MOD);
     }
 }
